@@ -1,20 +1,10 @@
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import authApi from '../api/auth';
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    axios
-      .post('http://localhost:6969/api/auth/login', data)
-      .then(function (response) {
-        if (response.data.success) {
-          localStorage.setItem('token', response.data.accessToken);
-          window.location.href = '/';
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    authApi.login(data);
   };
   return (
     <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12'>
