@@ -1,10 +1,20 @@
 import { useForm } from 'react-hook-form';
 import authApi from '../api/auth';
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    authApi.login(data);
+  const onSubmit = async (data) => {
+    const result = await authApi.login(data);
+    const { success, accessToken, refreshToken, message } = result;
+    if (success) {
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      toast(message);
+      window.location.href = '/';
+    } else {
+      toast.error(message);
+    }
   };
   return (
     <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12'>

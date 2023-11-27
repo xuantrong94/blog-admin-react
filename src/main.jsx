@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import App from './App';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-import App from './App';
+import './index.css';
 
 const router = createBrowserRouter([
   {
